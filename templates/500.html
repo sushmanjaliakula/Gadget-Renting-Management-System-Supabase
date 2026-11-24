@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block title %}Server error{% endblock %}{% block content %}<section class="panel error-panel"><h1>Something went wrong</h1><p class="muted">The server encountered an unexpected error. Check the Render logs for details.</p><a class="btn btn-primary" href="{{ url_for('dashboard') }}">Back to dashboard</a></section>{% endblock %}

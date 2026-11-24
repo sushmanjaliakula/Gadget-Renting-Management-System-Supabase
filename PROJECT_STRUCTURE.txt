@@ -1,0 +1,16 @@
+Gadget_Renting_Management_System/
+├── app.py                    Flask app and CRUD routes
+├── config.py                 Environment configuration
+├── database.py               MySQL connection helpers
+├── requirements.txt          Python dependencies
+├── Procfile                  Render/Gunicorn start command
+├── render.yaml               Render service blueprint
+├── .env.example               Environment variable template
+├── .gitignore                Excludes secrets and virtual environments
+├── README.md                 Setup, GitHub and Render deployment
+├── templates/                Jinja HTML pages
+├── static/css/               Responsive dark/light styles
+├── static/js/                Theme and navigation behavior
+├── sql/source_files/         Original uploaded SQL files
+├── sql/README.md              SQL preservation/import guidance
+└── scripts/test_connection.py MySQL verification script

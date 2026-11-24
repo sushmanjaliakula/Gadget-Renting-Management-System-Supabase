@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Gadget Renting{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="{{ url_for('dashboard') }}">
+      <span class="brand-mark">G</span>
+      <span><strong>Gadget<span class="brand-accent">Rent</span></strong><small>MANAGEMENT PORTAL</small></span>
+    </a>
+    <div class="nav-label">WORKSPACE</div>
+    <nav class="nav-menu">
+      <a href="{{ url_for('dashboard') }}" class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}"><span>◫</span> Dashboard</a>
+      <div class="nav-label nav-label-spaced">DATABASE TABLES</div>
+      {% for key, label, symbol in [
+        ('customers','Customers','♙'), ('gadgets','Gadgets','▣'),
+        ('rentals','Rentals','⇄'), ('payments','Payments','₹'),
+        ('returns','Returns','↩'), ('maintenance','Maintenance','⚙')
+      ] %}
+      <a href="{{ url_for('list_records', key=key) }}" class="nav-link {% if request.view_args and request.view_args.get('key') == key %}active{% endif %}"><span>{{ symbol }}</span> {{ label }}</a>
+      {% endfor %}
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="status-dot"></div><span>Database-driven workspace</span>
+    </div>
+  </aside>
+  <main class="main-area">
+    <header class="topbar">
+      <button class="icon-btn mobile-menu" id="menuToggle" aria-label="Open menu">☰</button>
+      <div class="breadcrumb">Workspace <span>/</span> {% block breadcrumb %}Overview{% endblock %}</div>
+      <div class="top-actions">
+        <span class="live-label"><i></i> SYSTEM</span>
+        <button class="theme-toggle" id="themeToggle" type="button" title="Toggle light/dark theme"><span id="themeIcon">☼</span><span id="themeText">Light mode</span></button>
+      </div>
+    </header>
+    <section class="page-content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-stack">
+          {% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+      <footer class="footer">Gadget Renting Management System <span>•</span> Connected to your MySQL schema</footer>
+    </section>
+  </main>
+</div>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
